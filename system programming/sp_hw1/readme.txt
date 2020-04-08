@@ -1,4 +1,0 @@
-compile:我沒改過Makefile的內容，server.c的檔名也沒有改，所以直接make應該可以編譯
-我覺得這個程式比較重要的地方是write server的部份，值得注意的是要先吃到account id(存在request buffer)，然後下一次的read再去吃command，會改掉request的buffer值，所以要記下來原本是要access哪一個account，然後因為request裡面的item感覺沒有用，我就自己把他改成id，用來存要更動的account。
-還有就是Lock的概念，一開始不知道為什麼兩個client連到同一個write server上，其中一個要了一個read lock後，另外一個還可以再要，後來才想起來老師說過lock是用來deny不同process的寫檔，所以同一個write server當然就沒辦法用上lock的方式檔到另外一個client(因為是同一個process)，解決辦法是使用一個lock table用來處理同一個port number的server中應該要上Lock的部份。
-
